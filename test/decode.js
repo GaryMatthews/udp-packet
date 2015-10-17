@@ -1,4 +1,6 @@
 var udp = require('../')
+var ip = require('ip-packet')
+var xtend = require('xtend')
 var test = require('tape')
 
 /* gathered with: sudo tcpdump -X -i wlan0
@@ -31,5 +33,15 @@ test('decode a real packet', function (t) {
   t.equal(packet.sourcePort, 60001)
   t.equal(packet.destinationPort, 58078)
   t.equal(packet.length, 72 + 8)
+  t.end()
+})
+
+test('verify checksum from real packet', function (t) {
+  var ipPacket = ip.decode(data)
+  var udpPacket = udp.decode(ipPacket.data)
+  t.equal(
+    udp.checksum(xtend(ipPacket, udpPacket)),
+    udpPacket.checksum
+  )
   t.end()
 })

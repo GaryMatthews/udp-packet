@@ -1,0 +1,40 @@
+{
+  "name": "udp-packet",
+  "version": "1.0.0",
+  "description": "encode/decode raw udp packets",
+  "main": "index.js",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "dependencies": {
+    "ip-packet": "^1.0.2",
+    "js-crc": "^0.1.0"
+  },
+  "devDependencies": {
+    "ip-packet": "^1.0.2",
+    "tape": "^4.2.1",
+    "xtend": "^4.0.0"
+  },
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/substack/udp-packet.git"
+  },
+  "keywords": [
+    "udp",
+    "packet",
+    "ip",
+    "decode",
+    "encode",
+    "dgram"
+  ],
+  "author": "substack",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/substack/udp-packet/issues"
+  },
+  "homepage": "https://github.com/substack/udp-packet#readme"
+}
