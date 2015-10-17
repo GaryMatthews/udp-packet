@@ -7,10 +7,7 @@
     "example": "example",
     "test": "test"
   },
-  "dependencies": {
-    "ip-packet": "^1.0.2",
-    "js-crc": "^0.1.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "ip-packet": "^1.0.2",
     "tape": "^4.2.1",
@@ -25,6 +22,7 @@
   },
   "keywords": [
     "udp",
+    "rfc768",
     "packet",
     "ip",
     "decode",
