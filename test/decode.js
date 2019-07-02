@@ -39,8 +39,9 @@ test('decode a real packet', function (t) {
 test('verify checksum from real packet', function (t) {
   var ipPacket = ip.decode(data)
   var udpPacket = udp.decode(ipPacket.data)
+
   t.equal(
-    udp.checksum(xtend(ipPacket, udpPacket)),
+    udp.checksum(xtend(ipPacket, udpPacket), ipPacket.data),
     udpPacket.checksum
   )
   t.end()

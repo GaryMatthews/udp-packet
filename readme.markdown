@@ -60,7 +60,7 @@ Encode a `packet`:
 * `packet.destinationPort`
 * `packet.data` - buffer payload
 
-Optionally, for checksums (not currently working):
+Optionally, for checksums:
 
 * `packet.sourceIp` - ipv4 address string or 4-byte buffer
 * `packet.destinationIp` - ipv4 address string or 4-byte buffer
@@ -76,7 +76,7 @@ Decode a given a UDP data packet `buf`:
 * `packet.checksum` - does not yet match measured values
 * `packet.data`
 
-## var sum = udp.checksum(packet)
+## var sum = udp.checksum(packet, buffer)
 
 Return the checksum for a decoded `packet`.
 

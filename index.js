@@ -5,9 +5,8 @@ exports.encode = function (packet) {
   buf.writeUInt16BE(srcport, 0)
   buf.writeUInt16BE(dstport, 2)
   buf.writeUInt16BE(buf.length, 4)
-  var protocol = packet.protocol === undefined ? 0x11 : packet.protocol
-  buf.writeUInt16BE(checksum(packet), 6)
   packet.data.copy(buf, 8)
+  buf.writeUInt16BE(checksum(packet, buf), 6)
   return buf
 }
 
@@ -23,11 +22,11 @@ exports.decode = function (buf) {
 }
 
 exports.checksum = checksum
-function checksum (packet) {
+function checksum (packet, buf) {
   // pseudo header: srcip (16), dstip (16), 0 (8), proto (8), udp len (16)
-  var data = packet.data, len = data.length
-  var srcport = packet.sourcePort, srcip = packet.sourceIp
-  var dstport = packet.destinationPort, dstip = packet.destinationIp
+  var len = buf.length
+  var srcip = packet.sourceIp
+  var dstip = packet.destinationIp
   if (!srcip || !dstip) return 0xffff
   var protocol = packet.protocol === undefined ? 0x11 : packet.protocol
   var sum = 0xffff
@@ -38,7 +37,11 @@ function checksum (packet) {
     sum = 0
     var pad = len % 2
     for (var i = 0; i < len + pad; i += 2) {
-      sum += ((data[i]<<8)&0xff00) + ((data[i+1])&0xff)
+      if (i === 6) continue // ignore the currently written checksum
+      sum += ((buf[i]<<8)&0xff00) + ((buf[i+1])&0xff)
+    }
+    for (var i = 0; i < 4; i += 2) {
+      sum += ((srcip[i]<<8)&0xff00) + (srcip[i+1]&0xff)
     }
     for (var i = 0; i < 4; i += 2) {
       sum += ((dstip[i]<<8)&0xff00) + (dstip[i+1]&0xff)
