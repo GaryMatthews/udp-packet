@@ -17,7 +17,7 @@ console.log(udp.encode({
 output:
 
 ```
-<Buffer e6 38 00 50 00 10 52 1f 77 68 61 74 65 76 65 72>
+<Buffer e6 38 00 50 00 10 61 7d 77 68 61 74 65 76 65 72>
 ```
 
 # decode example
@@ -73,7 +73,7 @@ Decode a given a UDP data packet `buf`:
 * `packet.sourcePort`
 * `packet.destinationPort`
 * `packet.length` - length of total udp packet, including 8 byte header
-* `packet.checksum` - does not yet match measured values
+* `packet.checksum`
 * `packet.data`
 
 ## var sum = udp.checksum(packet, buffer)
