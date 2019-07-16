@@ -13,7 +13,7 @@ var test = require('tape')
         0x0050:  6e08 9a4a ad6e 51ed 0bf6 13ff d824 bfba  n..J.nQ......$..
         0x0060:  a40b 05ad                                ....
 */
-var data = Buffer([
+var data = Buffer.from([
   // 20 bytes of IP header:
   0x45, 0x22, 0x00, 0x64, 0x49, 0x71, 0x00, 0x00,
   0x33, 0x11, 0xca, 0x1b, 0x68, 0x83, 0x00, 0xeb,

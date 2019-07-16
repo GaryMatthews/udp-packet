@@ -1,7 +1,7 @@
 exports.encode = function (packet) {
   var data = packet.data, len = data.length
   var srcport = packet.sourcePort, dstport = packet.destinationPort
-  var buf = new Buffer(len + 8)
+  var buf = Buffer.alloc(len + 8)
   buf.writeUInt16BE(srcport, 0)
   buf.writeUInt16BE(dstport, 2)
   buf.writeUInt16BE(buf.length, 4)
@@ -32,8 +32,8 @@ function checksum (packet, buf) {
   var sum = 0xffff
   // pseudo header: srcip (16), dstip (16), 0 (8), proto (8), udp len (16)
   if (srcip && dstip) {
-    if (typeof srcip === 'string') srcip = Buffer(srcip.split('.'))
-    if (typeof dstip === 'string') dstip = Buffer(dstip.split('.'))
+    if (typeof srcip === 'string') srcip = Buffer.from(srcip.split('.'))
+    if (typeof dstip === 'string') dstip = Buffer.from(dstip.split('.'))
     sum = 0
     var pad = len % 2
     for (var i = 0; i < len + pad; i += 2) {

@@ -5,5 +5,5 @@ console.log(udp.encode({
   sourcePort: 58936,
   destinationIp: '10.0.0.2',
   destinationPort: 80,
-  data: Buffer('whatever')
+  data: Buffer.from('whatever')
 }))
